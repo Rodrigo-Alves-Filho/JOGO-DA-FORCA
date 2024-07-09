@@ -14,11 +14,11 @@ function guessLetter() {
                 document.getElementById('wordDisplay').textContent = data.hiddenWord;
                 if (data.won) {
                     alert('Você venceu!');
-                    location.reload();  // Reinicia o jogo
+                    location.reload();  
                 }
                 if (data.lost) {
                     alert('Você perdeu!');
-                    location.reload();  // Reinicia o jogo
+                    location.reload();  
                 }
                 drawHangman(data.attempts);
             } else {

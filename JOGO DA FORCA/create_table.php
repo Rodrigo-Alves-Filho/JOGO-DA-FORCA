@@ -5,7 +5,6 @@ try {
     $db = new Database();
     $pdo = $db->getConnection();
 
-    // Criação da tabela 'words'
     $sql = "CREATE TABLE IF NOT EXISTS words (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         word TEXT NOT NULL,

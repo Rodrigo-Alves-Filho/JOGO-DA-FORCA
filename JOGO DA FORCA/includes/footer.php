@@ -1,5 +1,5 @@
 <footer>
-        <p>&copy; 2024 Jogo da Forca</p>
+        <p>&copy; Jogo da Forca Rodrigo Alves Filho</p>
     </footer>
 </body>
 </html>
