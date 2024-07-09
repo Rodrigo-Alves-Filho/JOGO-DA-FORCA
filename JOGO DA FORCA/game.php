@@ -1,40 +1,50 @@
-<?php
-session_start();
-include 'includes/header.php';
-include 'classes/Database.php';
-include 'classes/Word.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <?php
+    session_start();
+    include 'includes/header.php';
+    include 'classes/Database.php';
+    include 'classes/Word.php';
 
-// Iniciar um novo jogo se não houver palavra selecionada
-if (!isset($_SESSION['word'])) {
-    $db = new Database();
-    $wordObj = new Word($db->getConnection());
-    $_SESSION['word'] = $wordObj->getRandomWord();
-    $_SESSION['guessed'] = [];
-    $_SESSION['attempts'] = 0;
-}
+    if (!isset($_SESSION['word'])) {
+        $db = new Database();
+        $wordObj = new Word($db->getConnection());
+        $_SESSION['word'] = $wordObj->getRandomWord();
+        $_SESSION['guessed'] = [];
+        $_SESSION['attempts'] = 0;
+    }
 
-// Preparar a palavra e os espaços para mostrar na tela
-$word = $_SESSION['word'];
-$guessed = $_SESSION['guessed'];
-$hiddenWord = '';
+    $word = $_SESSION['word'];
+    $guessed = $_SESSION['guessed'];
+    $hiddenWord = '';
 
-for ($i = 0; $i < strlen($word); $i++) {
-    $hiddenWord .= in_array($word[$i], $guessed) ? $word[$i] . ' ' : '_ ';
-}
-?>
+    for ($i = 0; $i < strlen($word); $i++) {
+        $hiddenWord .= in_array($word[$i], $guessed) ? $word[$i] . ' ' : '_ ';
+    }
+    ?>
 
-<p id="wordDisplay"><?php echo $hiddenWord; ?></p>
-<input type="text" id="letter" maxlength="1">
-<button onclick="guessLetter()">Enviar</button>
+    <p id="wordDisplay"><?php echo $hiddenWord; ?></p>
+    <input type="text" id="letter" maxlength="1">
+    <button onclick="guessLetter()">Enviar</button>
 
-<div id="hangman">
-    <!-- Aqui será desenhado o boneco da forca -->
-    <div id="head">O</div>
-    <div id="body">|</div>
-    <div id="arms">/|\\</div>
-    <div id="legs">/ \\</div>
-</div>
+    <div id="hangman">
+        <div id="head" class="part">O</div> 
+        <div id="leftArm" class="part">/</div>
+        <div id="rightArm" class="part">\</div>
+        <div id="body" class="part">|</div>
+        <div id="leftLeg" class="part">/</div>
+        <div id="rightLeg" class="part">\</div>
+    </div>
 
-<script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 
-<?php include 'includes/footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
+</body>
+</html>

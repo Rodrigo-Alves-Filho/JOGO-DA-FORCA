@@ -30,8 +30,8 @@ function guessLetter() {
 }
 
 function drawHangman(attempts) {
-    let hangmanParts = ['head', 'body', 'arms', 'legs'];
-    hangmanParts.forEach((part, index) => {
+    const parts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
+    parts.forEach((part, index) => {
         document.getElementById(part).style.display = (index < attempts) ? 'block' : 'none';
     });
 }
